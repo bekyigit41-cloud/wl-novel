@@ -2,56 +2,76 @@
 <html lang="uz">
 <head>
     <meta charset="UTF-8">
-    <title>Matn saqlash sahifasi</title>
+    <title>WebNovel Demo</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            padding: 20px;
             max-width: 800px;
             margin: auto;
-            background-color: #f0f0f0;
+            padding: 20px;
+            background: #f9f9f9;
         }
-        textarea {
+        h1 { text-align: center; }
+        .chapter-list button {
+            display: block;
             width: 100%;
-            height: 400px;
             padding: 10px;
-            font-size: 16px;
-            box-sizing: border-box;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
+            margin: 5px 0;
+            font-size: 18px;
             cursor: pointer;
+        }
+        #chapterContent {
+            white-space: pre-wrap;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            margin-top: 20px;
+            min-height: 200px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Matn saqlash sahifasi</h1>
-    <textarea id="myText" placeholder="Matningizni shu yerga yozing..."></textarea><br>
-    <button onclick="saveText()">Save</button>
-    <p id="status"></p>
+<h1>WebNovel Demo</h1>
 
-    <script>
-        // Sahifa ochilganda saqlangan matnni yuklash
-        window.onload = function() {
-            const savedText = localStorage.getItem("chapterText");
-            if (savedText) {
-                document.getElementById("myText").value = savedText;
-            }
-        }
+<div class="chapter-list">
+    <button onclick="loadChapter(1)">1-bob</button>
+    <button onclick="loadChapter(2)">2-bob</button>
+    <button onclick="loadChapter(3)">3-bob</button>
+</div>
 
-        // Matnni saqlash funksiyasi
-        function saveText() {
-            const text = document.getElementById("myText").value;
-            localStorage.setItem("chapterText", text);
-            document.getElementById("status").innerText = "Matn saqlandi ✅";
-            setTimeout(() => {
-                document.getElementById("status").innerText = "";
-            }, 2000);
+<div id="chapterContent">Bobni tanlang...</div>
+
+<script>
+    // Boblarni localStorage orqali saqlaymiz
+    const chapters = {
+        1: "Bu 1-bobning matni. Siz uni bu yerga yozishingiz mumkin...",
+        2: "Bu 2-bob. Har bir bob alohida matn bilan ishlaydi...",
+        3: "3-bob matni. Siz uni keyinchalik o‘zgartirishingiz mumkin..."
+    };
+
+    // Sahifa yuklanganda localStorage'dan yuklash
+    window.onload = function() {
+        for (let i = 1; i <= 3; i++) {
+            const saved = localStorage.getItem("chapter" + i);
+            if (saved) chapters[i] = saved;
         }
-    </script>
+    }
+
+    // Bobni yuklash
+    function loadChapter(num) {
+        document.getElementById("chapterContent").innerText = chapters[num];
+    }
+
+    // Misol uchun admin uchun matn qo‘shish
+    function saveChapter(num, text) {
+        chapters[num] = text;
+        localStorage.setItem("chapter" + num, text);
+    }
+
+    // Misol: 1-bobni saqlash
+    // saveChapter(1, "Yangilangan 1-bob matni...");
+</script>
 
 </body>
 </html>
