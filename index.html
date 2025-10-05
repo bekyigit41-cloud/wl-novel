@@ -37,3 +37,37 @@
 
 <h3>📖 Natija:</h3>
 <div id="natija" style="border:1px solid gray; padding:10px;"></div>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <title>Faqat Tarjima</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    .translation { color: black; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<h2>Faqat Tarjima</h2>
+
+<div id="translation-container"></div>
+
+<script>
+  const sentences = [
+    { original: "The cat is sitting on the roof.", translation: "Mushuk tom ustida o‘tirgan." },
+    { original: "It looks very comfortable.", translation: "U juda qulay ko‘rinadi." }
+  ];
+
+  const container = document.getElementById("translation-container");
+
+  sentences.forEach(s => {
+    const div = document.createElement("div");
+    div.classList.add("translation");
+    div.textContent = s.translation; // faqat tarjima
+    container.appendChild(div);
+  });
+</script>
+
+</body>
+</html>
