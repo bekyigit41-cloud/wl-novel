@@ -1,73 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>wl novel</title>
-</head>
-<body>
-    <h1>📚 wl novel saytingga xush kelibsan!</h1>
-
-    <p>Bu yerga sen xohlagan kitoblar yoki matnlarni joylab, Chrome orqali tarjimasini ko'rishing mumkin.</p>
-
-    <h2>📖 Kitobdan parcha:</h2>
-    <div>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tincidunt facilisis felis...
-        </p>
-    </div>
-
-    <h2>✍️ Yana matn qo‘shish:</h2>
-    <div>
-        <p>
-            Bu yerga istagan matningni yoz yoki keyinchalik joylashtir.
-        </p>
-    </div>
-</body>
-</html>
-<script>
-    function showText() {
-        const val = document.getElementById("matn").value;
-        document.getElementById("natija").innerText = val;
-    }
-</script>
-
-<h2>✍️ Yoz matnni — pastda chiqadi:</h2>
-<textarea id="matn" rows="10" cols="60" placeholder="Bu yerga yoz..."></textarea><br>
-<button onclick="showText()">Ko‘rsatish</button>
-
-<h3>📖 Natija:</h3>
-<div id="natija" style="border:1px solid gray; padding:10px;"></div>
-<!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <title>Faqat Tarjima</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    .translation { color: black; margin-bottom: 10px; }
-  </style>
+    <meta charset="UTF-8">
+    <title>Matn saqlash sahifasi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: #f0f0f0;
+        }
+        textarea {
+            width: 100%;
+            height: 400px;
+            padding: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Faqat Tarjima</h2>
+    <h1>Matn saqlash sahifasi</h1>
+    <textarea id="myText" placeholder="Matningizni shu yerga yozing..."></textarea><br>
+    <button onclick="saveText()">Save</button>
+    <p id="status"></p>
 
-<div id="translation-container"></div>
+    <script>
+        // Sahifa ochilganda saqlangan matnni yuklash
+        window.onload = function() {
+            const savedText = localStorage.getItem("chapterText");
+            if (savedText) {
+                document.getElementById("myText").value = savedText;
+            }
+        }
 
-<script>
-  const sentences = [
-    { original: "The cat is sitting on the roof.", translation: "Mushuk tom ustida o‘tirgan." },
-    { original: "It looks very comfortable.", translation: "U juda qulay ko‘rinadi." }
-  ];
-
-  const container = document.getElementById("translation-container");
-
-  sentences.forEach(s => {
-    const div = document.createElement("div");
-    div.classList.add("translation");
-    div.textContent = s.translation; // faqat tarjima
-    container.appendChild(div);
-  });
-</script>
+        // Matnni saqlash funksiyasi
+        function saveText() {
+            const text = document.getElementById("myText").value;
+            localStorage.setItem("chapterText", text);
+            document.getElementById("status").innerText = "Matn saqlandi ✅";
+            setTimeout(() => {
+                document.getElementById("status").innerText = "";
+            }, 2000);
+        }
+    </script>
 
 </body>
 </html>
